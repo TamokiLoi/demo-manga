@@ -1,0 +1,23 @@
+{
+  "name": "nextjs.lakemanga.com",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && next export",
+    "start": "next start -p $PORT"
+  },
+  "dependencies": {
+    "date-fns": "^2.16.1",
+    "lodash": "^4.17.20",
+    "moment": "^2.29.1",
+    "next": "10.0.1",
+    "react": "17.0.1",
+    "react-dom": "17.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.7",
+    "@types/react": "^16.9.56",
+    "typescript": "^4.0.5"
+  }
+}
