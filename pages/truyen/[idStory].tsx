@@ -386,38 +386,7 @@ const StoryPage: NextPage<Props> = ({ data, deviceType }) => {
     );
 };
 
-// export async function getServerSideProps({ params }) {
-//     const res = await fetch(`http://66.152.189.94:8083/v1/client/story/${params.idStory.split('-').pop()}`)
-//     const { data } = await res.json()
-//     return {
-//         props: {
-//             data,
-//         },
-//     };
-// }
-
-export async function getStaticPaths() {
-    // Return a list of possible value for id
-    const res = await fetch(`http://66.152.189.94:8083/v1/client/get-list-newest?offset=0&limit=1000000`)
-    const { data } = await res.json();
-    const { List, Total } = data;
-    const list = [];
-    List.map((story) => {
-        list.push({
-            params: {
-                idStory: `${story.url.split('/').pop()}`
-            }
-        })
-    })
-    const paths = list;
-    return {
-        paths,
-        fallback: false
-    }
-}
-
-
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
     const res = await fetch(`http://66.152.189.94:8083/v1/client/story/${params.idStory.split('-').pop()}`)
     const { data } = await res.json()
     return {
@@ -426,5 +395,36 @@ export async function getStaticProps({ params }) {
         },
     };
 }
+
+// export async function getStaticPaths() {
+//     // Return a list of possible value for id
+//     const res = await fetch(`http://66.152.189.94:8083/v1/client/get-list-newest?offset=0&limit=1000000`)
+//     const { data } = await res.json();
+//     const { List, Total } = data;
+//     const list = [];
+//     List.map((story) => {
+//         list.push({
+//             params: {
+//                 idStory: `${story.url.split('/').pop()}`
+//             }
+//         })
+//     })
+//     const paths = list;
+//     return {
+//         paths,
+//         fallback: false
+//     }
+// }
+
+
+// export async function getStaticProps({ params }) {
+//     const res = await fetch(`http://66.152.189.94:8083/v1/client/story/${params.idStory.split('-').pop()}`)
+//     const { data } = await res.json()
+//     return {
+//         props: {
+//             data,
+//         },
+//     };
+// }
 
 export default StoryPage;

@@ -126,9 +126,9 @@ const IndexPage: React.FC<Props> = ({ data, deviceType }) => {
             <section id="content">
                 <div className="content-wrap index-page content-wrap-custom" style={{ padding: '0px 0px 20px !important' }}>
                     {/* slide */}
-                    <div className="container clearfix" style={{padding: '0 6px'}}>
+                    {/* <div className="container clearfix" style={{padding: '0 6px'}}>
                         <SlideBar />
-                    </div>
+                    </div> */}
 
                     {/* content-main */}
                     <div className="container clearfix index-page">
@@ -159,9 +159,9 @@ const IndexPage: React.FC<Props> = ({ data, deviceType }) => {
                                             </a>
                                         </div> */}
 
-                                        {/* <div className="col-12">
+                                        <div className="col-12">
                                             <PaginationCustom total={Total} urlSearch="/" keySearch='' className='justify-content-center' />
-                                        </div> */}
+                                        </div>
                                     </div>
                                 </div>
 
@@ -183,27 +183,27 @@ const IndexPage: React.FC<Props> = ({ data, deviceType }) => {
     );
 };
 
-export async function getStaticProps({ params }) {
-    const res = await fetch(`http://66.152.189.94:8083/v1/client/get-list-newest?limit=10&offset=0`)
-    const { data } = await res.json()
-    return {
-        props: {
-            data,
-        },
-    };
-}
-
-// export async function getServerSideProps({ query }) {
-//     const offset = query['offset'] ? query['offset'] : PAGINATION_DATA.OFFSET;
-//     const limit = query['limit'] ? query['limit'] : PAGINATION_DATA.LIMIT;
-//     const page = query['page'] ? query['page'] : PAGINATION_DATA.CURRENT_PAGE;
-//     const res = await fetch(`http://66.152.189.94:8083/v1/client/get-list-newest?limit=${limit}&offset=${offset}&page=${page}`)
-//     const { data } = await res.json();
+// export async function getStaticProps({ params }) {
+//     const res = await fetch(`http://66.152.189.94:8083/v1/client/get-list-newest?limit=10&offset=0`)
+//     const { data } = await res.json()
 //     return {
 //         props: {
 //             data,
 //         },
-//     }
+//     };
 // }
+
+export async function getServerSideProps({ query }) {
+    const offset = query['offset'] ? query['offset'] : PAGINATION_DATA.OFFSET;
+    const limit = query['limit'] ? query['limit'] : PAGINATION_DATA.LIMIT;
+    const page = query['page'] ? query['page'] : PAGINATION_DATA.CURRENT_PAGE;
+    const res = await fetch(`http://66.152.189.94:8083/v1/client/get-list-newest?limit=${limit}&offset=${offset}&page=${page}`)
+    const { data } = await res.json();
+    return {
+        props: {
+            data,
+        },
+    }
+}
 
 export default IndexPage;
